@@ -1,18 +1,20 @@
 # gorm-paginate
 Gorm Pagination
 
-### Usage
+### Usage && 使用方式 
 `go get github.com/ifconfigure/gorm-paginate`
 
 
-### Example
+### Example && 例子
 
 ```
+// 1、Chaining - 链式操作查询
 userLikesTx := db.Model(UserLikes{}).
     Order("created_at desc").
     Where("to_user_id = ?", toUserID).
     Preload("User.Country")
 
+//2、use paginate - 调用分页类
 res, err := paginage.Paginate(userLikesTx, int(currentPage), &userLikes)
 
 if err != nil {
@@ -20,6 +22,7 @@ if err != nil {
     return
 }
 
+3、output - 输出
 c.JSON(200 ,res)
 
 ```
